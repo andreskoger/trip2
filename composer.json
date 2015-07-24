@@ -10,7 +10,9 @@
         "guzzlehttp/guzzle": "~5.3|~6.0",
         "laravelcollective/html": "5.1.*",
         "intervention/image": "^2.3@dev",
-        "barryvdh/laravel-debugbar": "^2.0@dev"
+        "barryvdh/laravel-debugbar": "^2.0@dev",
+        "spatie/laravel-responsecache": "dev-master",
+        "predis/predis": "~1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

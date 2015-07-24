@@ -140,7 +140,8 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-        
+        Spatie\ResponseCache\ResponseCacheServiceProvider::class,
+  
         /*
          * Application Service Providers...
          */
