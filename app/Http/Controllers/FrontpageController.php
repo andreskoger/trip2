@@ -30,6 +30,8 @@ class FrontpageController extends Controller
             'offer',
         ];
 
+        $features = Cache::rememberForever('frontpage.index', function() use ($types) {
+
         $features = [];
 
         foreach ($types as $type) {
@@ -41,15 +43,16 @@ class FrontpageController extends Controller
                 ->get();
         
         }
-        
-        return Cache::rememberForever('frontpage.index', function() use ($destinations, $features) {
+
+        return $features;
+
+        });
 
             return View::make('pages.frontpage.index')
                 ->with('destinations', $destinations)
                 ->with('features', $features)
                 ->render();
         
-        });
 
     }
 
