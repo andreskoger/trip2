@@ -35,8 +35,8 @@ class LoginController extends Controller
         Auth::logout();
 
         return redirect()
-            ->route('frontpage.index')
-            ->with('info', trans('auth.login.logout.info'));
+            ->route('frontpage.index');
+//            ->with('info', trans('auth.login.logout.info'));
          //   ->header('Cache-Control', 'no-cache, private');
 
     }
