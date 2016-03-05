@@ -21,9 +21,9 @@ class LoginController extends Controller
         ]);
 
         if ($this->signIn($request)) {
-            return redirect('/')
+            return redirect('/', 307)
                 ->with('info', trans('auth.login.login.info'))
-                ->header('Cache-Control', 'no-cache')
+                ->header('Cache-Control', 'no-cache, private')
                 ->header('X-Logged', 'true');
         }
 
