@@ -11,17 +11,13 @@ class AuthenticatedHeader
     {
         $response = $next($request);
 
-        // $token = bcrypt(Auth::check() ? Auth::user()->id : 0);
-        // $response->header('X-User', $token);
-        
         if (Auth::check()) {
 
-            $response->header('X-Logged', 'true');
-      //      $response->withCookie('unlogged', 'true', 10);
+            $response->header('X-Logged', '1');
         
         } else {
 
-            $response->header('X-Unlogged', 'true');
+            $response->header('X-Unlogged', '1');
 
         }
 
