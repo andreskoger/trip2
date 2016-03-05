@@ -21,8 +21,7 @@ class LoginController extends Controller
         ]);
 
         if ($this->signIn($request)) {
-            return redirect()
-                ->route('styleguide')
+            return redirect('/')
                 ->with('info', trans('auth.login.login.info'));
         }
 
@@ -35,8 +34,7 @@ class LoginController extends Controller
     {
         Auth::logout();
 
-        return redirect()
-            ->route('login.form')
+        return redirect('/')
             ->with('info', trans('auth.login.logout.info'));
 
     }
