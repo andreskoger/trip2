@@ -16,7 +16,8 @@ class AuthenticatedHeader
         
         if (Auth::check()) {
 
-            $response->withCookie('logged', 'true', 10);
+            $response->header('X-Logged', 'true');
+      //      $response->withCookie('unlogged', 'true', 10);
         
         }
 
