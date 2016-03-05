@@ -35,8 +35,7 @@ class LoginController extends Controller
         Auth::logout();
 
         return redirect()
-            ->route('frontpage.index')
-            ->header('X-Logged', 'true')
+            ->route('login.form')
             ->with('info', trans('auth.login.logout.info'));
 
     }
