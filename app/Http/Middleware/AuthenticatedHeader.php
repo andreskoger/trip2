@@ -11,11 +11,9 @@ class AuthenticatedHeader
     {
         $response = $next($request);
 
-        if (Auth::check()) {
+        $token = bcrypt(Auth::check() ? Auth::user()->id : 0);
+        $response->header('X-User', $token);
 
-            $response->header('X-Logged',  'true');
-        
-        }
         
         return $response;
     }
