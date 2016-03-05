@@ -11,7 +11,7 @@ class AuthenticatedHeader
     {
         $response = $next($request);
 
-        $response->header('X-Loggedin', Auth::check() ? 'yes' : 'no');
+        $response->header('X-Logged', Auth::check() ? 'true' : 'false');
         
         return $response;
     }
