@@ -19,6 +19,10 @@ class AuthenticatedHeader
             $response->header('X-Logged', 'true');
       //      $response->withCookie('unlogged', 'true', 10);
         
+        } else {
+
+            $response->header('X-Unlogged', 'true');
+
         }
 
         return $response;
