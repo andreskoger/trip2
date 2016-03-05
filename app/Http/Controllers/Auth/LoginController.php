@@ -21,7 +21,8 @@ class LoginController extends Controller
         ]);
 
         if ($this->signIn($request)) {
-            return redirect('/')
+            return redirect(200)
+                ->route('frontpage.index')
                 ->with('info', trans('auth.login.login.info'));
         }
 
