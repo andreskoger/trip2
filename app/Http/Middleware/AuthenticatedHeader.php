@@ -14,8 +14,10 @@ class AuthenticatedHeader
         // $token = bcrypt(Auth::check() ? Auth::user()->id : 0);
         // $response->header('X-User', $token);
         
-        if (! Auth::check()) {
-            $response->withCookie(cookie()->forever('unlogged', 'true'));
+        if (Auth::check()) {
+
+            $response->withCookie('logged', 'true', 10);
+        
         }
 
         return $response;
