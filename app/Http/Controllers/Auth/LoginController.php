@@ -22,7 +22,7 @@ class LoginController extends Controller
 
         if ($this->signIn($request)) {
             return redirect('/')
-                ->with('info', trans('auth.login.login.info'));
+                ->with('info', trans('auth.login.login.info')):
         }
 
         return redirect()
@@ -36,7 +36,9 @@ class LoginController extends Controller
 
         return redirect()
             ->route('frontpage.index')
-            ->with('info', trans('auth.login.logout.info'));
+            ->with('info', trans('auth.login.logout.info'))
+            ->header('Cache-Control', 'no-cache, private');
+
     }
 
     protected function signIn(Request $request)
