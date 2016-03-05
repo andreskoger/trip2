@@ -22,7 +22,7 @@ class LoginController extends Controller
 
         if ($this->signIn($request)) {
             return redirect()
-                ->route('frontpage.index')
+                ->route('styleguide')
                 ->with('info', trans('auth.login.login.info'));
         }
 
