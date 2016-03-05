@@ -36,8 +36,8 @@ class LoginController extends Controller
 
         return redirect()
             ->route('frontpage.index')
-            ->with('info', trans('auth.login.logout.info'))
-            ->header('X-Logged', 'true');
+            ->header('X-Logged', 'true')
+            ->with('info', trans('auth.login.logout.info'));
 
     }
 
