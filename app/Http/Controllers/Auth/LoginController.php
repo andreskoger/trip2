@@ -36,9 +36,8 @@ class LoginController extends Controller
 
         return redirect()
             ->route('frontpage.index')
-         //   ->with('info', trans('auth.login.logout.info'))
-            ->with('info', '');
-            //->header('Cache-Control', 'no-cache, private');
+            ->with('info', trans('auth.login.logout.info'));
+         //   ->header('Cache-Control', 'no-cache, private');
 
     }
 
