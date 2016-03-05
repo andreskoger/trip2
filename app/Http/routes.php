@@ -141,7 +141,7 @@ Route::get('index.atom', ['uses' => 'FeedController@index', 'as' => 'feed']);
 
 // Styleguide
 
-Route::get('styleguide', 'StyleguideController@index');
+Route::get('styleguide', ['uses' => 'StyleguideController@index', 'as' => 'feed']);
 
 /*
  * Redirect old URL-s
