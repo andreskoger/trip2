@@ -13,7 +13,7 @@ class AuthenticatedHeader
 
         if (Auth::check()) {
 
-            $response->header('X-Logged',  'yes');
+            $response->header('X-Logged',  'true');
         
         }
         
