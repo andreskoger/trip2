@@ -14,7 +14,7 @@ class AuthenticatedHeader
         if (Auth::check()) {
 
             $response->header('X-Logged', 'true');
-            $response->header('Cache-Control', 'no-cache');
+            $response->header('Pragma', 'no-cache');
         
         } else {
 
