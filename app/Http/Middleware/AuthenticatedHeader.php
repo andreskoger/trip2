@@ -14,11 +14,11 @@ class AuthenticatedHeader
         if (Auth::check()) {
 
             $response->header('X-Logged', 'true');
+            $response->header('Cache-Control', 'no-cache');
         
         } else {
 
             $response->header('X-Unlogged', 'true');
-        $response->header('Cache-Control', 'no-cache');
 
         }
 
