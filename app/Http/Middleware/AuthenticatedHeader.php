@@ -18,7 +18,7 @@ class AuthenticatedHeader
         } else {
 
             $response->header('X-Unlogged', 'true');
-            $response->header('Cache-control', 'no-cache');
+            $response->withCookie(cookie('test', 'test', 1));
 
         }
 
