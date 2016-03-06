@@ -18,7 +18,7 @@ class AuthenticatedHeader
         } else {
 
             $response->header('X-Unlogged', 'true');
-            $response->header('Pragma', 'no-cache');
+            $response->header('Cache-control', 'no-cache');
 
         }
 
