@@ -22,13 +22,13 @@ class LoginController extends Controller
 
         if ($this->signIn($request)) {
             return redirect('/')
-                ->with('info', trans('auth.login.login.info'));
+                ->with('info', trans('auth.login.login.info'))
+                ->withCookie(cookie()->forever('user', 'true'));
         }
 
         return redirect()
             ->back()
-            ->with('info', trans('auth.login.failed.info'))
-            ->withCookie(cookie()->forever('user', 'true'));
+            ->with('info', trans('auth.login.failed.info'));
     }
 
     public function logout()
@@ -37,7 +37,7 @@ class LoginController extends Controller
 
         return redirect('/')
             ->with('info', trans('auth.login.logout.info'))
-             ->withCookie(\Cookie::forget('user'));
+            ->withCookie(Cookie::forget('cookie_name'));
 
     }
 
