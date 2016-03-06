@@ -13,11 +13,11 @@ class AuthenticatedHeader
 
         if (Auth::check()) {
 
-            $response->header('X-Logged', true);
+            $response->header('Logged', true);
         
         } else {
 
-            $response->header('X-Unlogged', true);
+            $response->header('Unlogged', true);
 
         }
 
