@@ -37,7 +37,7 @@ class LoginController extends Controller
 
         return redirect('/')
             ->with('info', trans('auth.login.logout.info'))
-            ->withCookie(\Cookie::forget('cookie_name'));
+            ->withCookie(\Cookie::forget('user'));
 
     }
 
