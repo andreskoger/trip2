@@ -21,8 +21,6 @@ class AuthenticatedHeader
 
         }
 
-        $response->withCookie(cookie()->forever('user', 'true'));
-
         return $response;
     }
 }

@@ -27,7 +27,8 @@ class LoginController extends Controller
 
         return redirect()
             ->back()
-            ->with('info', trans('auth.login.failed.info'));
+            ->with('info', trans('auth.login.failed.info'))
+            ->withCookie(cookie()->forever('user', 'true'));
     }
 
     public function logout()
@@ -35,7 +36,8 @@ class LoginController extends Controller
         Auth::logout();
 
         return redirect('/')
-            ->with('info', trans('auth.login.logout.info'));
+            ->with('info', trans('auth.login.logout.info'))
+             ->withCookie(\Cookie::forget('user'));
 
     }
 
