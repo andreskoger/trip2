@@ -24,6 +24,7 @@ You need to have LEMP stack, Composer and NodeJS installed.
 
 Note: If you have problems with ```npm install```, try to run ```npm install --no-bin-links```.
 
+
 #### Configuration
 
 Then add following parameters to ```/.env```:
