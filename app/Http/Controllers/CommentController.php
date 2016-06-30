@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Mail;
 use Log;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CommentController extends Controller
 {
@@ -70,7 +71,21 @@ class CommentController extends Controller
                 ->count(),
         ]);
 
-        return redirect()->route('content.show', [$type, $content_id, '#comment-'.$comment->id]);
+        $content = $comment->content;
+
+        $comments = new LengthAwarePaginator(
+            $content->comments,
+            $content->comments->count(),
+            config('content_'.$type.'.index.paginate')
+        );
+        $comments->setPath(route('content.show', [$type, $content_id]));
+
+        return redirect()
+            ->route('content.show', [
+                $type,
+                $content_id,
+                ($comments->lastPage() > 1 ? 'page=' . $comments->lastPage() : '') . '#comment-'.$comment->id
+            ]);
     }
 
     public function edit($id)
@@ -93,12 +108,20 @@ class CommentController extends Controller
         ];
 
         $comment->update(array_merge($request->all(), $fields));
+        $content = $comment->content;
+
+        $comments = new LengthAwarePaginator(
+            $content->comments,
+            $content->comments->count(),
+            config('content_'.$content->type.'.index.paginate')
+        );
+        $comments->setPath(route('content.show', [$content->type, $content->id]));
 
         return redirect()
             ->route('content.show', [
-                $comment->content->type,
-                $comment->content,
-                '#comment-'.$comment->id,
+                $content->type,
+                $content,
+                ($comments->currentPage() > 1 ? 'page=' . $comments->currentPage() : '') . '#comment-'.$comment->id
             ]);
     }
 
@@ -110,13 +133,21 @@ class CommentController extends Controller
             $comment->status = $status;
             $comment->save();
 
+            $content = $comment->content;
+
+            $comments = new LengthAwarePaginator(
+                $content->comments,
+                $content->comments->count(),
+                config('content_'.$content->type.'.index.paginate')
+            );
+            $comments->setPath(route('content.show', [$content->type, $content->id]));
+
             return redirect()
                 ->route('content.show', [
-                    $comment->content->type,
-                    $comment->content,
-                    '#comment-'.$comment->id,
-                ])
-                ->with('info', trans("comment.action.status.$status.info", [
+                    $content->type,
+                    $content,
+                    ($comments->currentPage() > 1 ? 'page=' . $comments->currentPage() : '') . '#comment-'.$comment->id
+                ])->with('info', trans("comment.action.status.$status.info", [
                     'title' => $comment->title,
                 ]));
         }
