@@ -9,7 +9,7 @@ class DemoTest extends TestCase
 {
     use DatabaseTransactions;
 
-    public function test_regular_user_can_create_and_edit_comment()
+    public function test_forum_content_do_not_update_timestamp_on_update()
     {
     
         $content = factory(Content::class)->create([
@@ -25,8 +25,9 @@ class DemoTest extends TestCase
 
         $second_date = Content::find($content->id)->updated_at;
 
-        dump($first_date->lt($second_date));
+//        $this->assertTrue($first_date->gt($second_date));
 
+        $this->assertGreaterThan($first_date->timestamp, $second_date->timestamp);
     }
 
 }
