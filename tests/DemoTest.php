@@ -14,15 +14,37 @@ class DemoTest extends TestCase
 
         $superuser = factory(App\User::class)->create(['role' => 'superuser']);
 
-        $types = collect([
-            'forum' => 'assertEquals',
-            'buysell' => 'assertEquals',
-            'expat' => 'assertEquals',
-            'news' => 'assertGreaterThan'
-        ])->each(function($assertion, $type) use ($superuser) {
+        $typesUpdatingTimestamp = [
+            'news',
+            'flight'
+        ];
+
+        $typesNotUpdatingTimestamp = [
+            'forum',
+            'buysell',
+            'expat'
+        ];
+        
+        // Mapping the correct PHPUnit assertions to each type
+
+        $types = collect($typesUpdatingTimestamp)
+            ->map(function($type) {
+                return [$type => 'assertGreaterThan'];
+            })
+            ->merge(collect($typesNotUpdatingTimestamp)
+                ->map(function($type) {
+                    return [$type => 'assertEquals'];
+                })
+            )
+            ->flatten(1);
+
+        // Iterating over the types and making sure
+        // the timestamps either update or not
+
+        $types->each(function($assertion, $type) use ($superuser) {
 
             $content = factory(Content::class)->create([
-                'user_id' =>$superuser->id,
+                'user_id' => $superuser->id,
                 'type' => $type
             ]);
 
@@ -41,6 +63,38 @@ class DemoTest extends TestCase
             
         });
 
+    }
+
+    public function test_content_timestamp_does_not_update_when_its_comment_is_updated()
+    {
+
+        $superuser = factory(App\User::class)->create(['role' => 'superuser']);
+
+        $type = 'forum';
+
+        $content = factory(Content::class)->create([
+            'user_id' => $superuser->id,
+            'type' => $type,
+        ]);
+
+        $comment = factory(Comment::class)->create([
+            'user_id' => $superuser->id,
+            'content_id' => $content->id,
+        ]);
+
+        $first_date = Content::find($content->id)->updated_at;
+
+        sleep(1);
+
+        $this->actingAs($superuser)
+            ->visit("comment/$comment->id/edit")
+            ->type('Hola', 'body')
+            ->press(trans('comment.edit.submit.title'));
+
+        $second_date = Content::find($content->id)->updated_at;
+
+        $this->assertGreaterThan($first_date->timestamp, $second_date->timestamp);
+    
     }
 
 }
