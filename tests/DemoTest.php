@@ -16,7 +16,9 @@ class DemoTest extends TestCase
 
         $types = collect([
             'forum' => 'assertEquals',
-            'flight' => 'assertGreaterThan'
+            'buysell' => 'assertEquals',
+            'expat' => 'assertEquals',
+            'news' => 'assertGreaterThan'
         ])->each(function($assertion, $type) use ($superuser) {
 
             $content = factory(Content::class)->create([
