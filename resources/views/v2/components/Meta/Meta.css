@@ -3,11 +3,10 @@
 .Meta {
     display: flex;
     align-items: center;
-    flex-wrap: wrap ?if $mobile;
+    flex-wrap: wrap;
 }
 
     .Meta__item {
-        margin: $margin-xs ?if $mobile;
-        margin-right: $margin-sm;
+        margin: $margin-xs;
     }
 

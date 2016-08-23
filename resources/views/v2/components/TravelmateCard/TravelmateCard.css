@@ -2,12 +2,13 @@
 
 .TravelmateCard {
 	display: flex;
+    border: $border-gray-md;
+    border-radius: $border-radius-lg;
+    padding: $padding-xs;
 }
 
 	.TravelmateCard__content {
 		margin-left: $margin-sm;
-		aflex-direction: column;
-		ajustify-content: space-around;
 	}
 
     .TravelmateCard__metaTop {
