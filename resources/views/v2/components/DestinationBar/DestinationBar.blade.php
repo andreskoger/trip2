@@ -9,13 +9,17 @@ $parents = $parents ?? '';
 <div class="DestinationBar {{ $isclasses }}">
 
     <div>
-                    
+            
+            @if ($parents)
+
             <div class="DestinationBar__parents">
 
                 {!! $parents  !!}
 
             </div>
 
+            @endif
+            
             <a href="{{ $route }}">
 
                 <div class="DestinationBar__title">

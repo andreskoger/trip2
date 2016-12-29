@@ -9,8 +9,8 @@ class DestinationBar
         return component('DestinationBar')
             ->is($is)
             ->with('title', $destination->vars()->name)
-            ->with('route', route('v2.destination.show', [$destination]))
-            ->with('parents', $parents
+            ->with('route', route('v2.destination.show', [$destination]));
+        /*  ->with('parents', $parents
                 ->reverse()
                 ->slice(0, $parents->count() > 2 ? 2 : null)
                 ->reverse()
@@ -23,5 +23,6 @@ class DestinationBar
                 ->render()
                 ->implode('')
             );
+        */
     }
 }
